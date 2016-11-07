@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="server" targetNamespace="urn:server" xmlns:typens="urn:server" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+	<message name="getUserList" />
+	<message name="getProductList" />
+	<message name="getUserListResponse">
+		<part name="getUserListReturn" type="xsd:string"/>
+	</message>
+	<message name="getProductListResponse">
+		<part name="getProductListReturn" type="xsd:string"/>
+	</message>
+	<portType name="ServerPortType">
+		<operation name="getUserList">
+			<input message="typens:getUserList"/>
+			<output message="typens:getUserListResponse"/>
+		</operation>
+		<operation name="getProductList">
+			<input message="typens:getProductList"/>
+			<output message="typens:getProductListResponse"/>
+		</operation>
+	</portType>
+	<binding name="ServerBinding" type="typens:ServerPortType">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="getUserList">
+			<soap:operation soapAction="urn:ServerAction"/>
+			<input>
+				<soap:body namespace="urn:server" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:server" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+		<operation name="getProductList">
+			<soap:operation soapAction="urn:ServerAction"/>
+			<input>
+				<soap:body namespace="urn:server" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body namespace="urn:server" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="serverService">
+		<port name="ServerPort" binding="typens:ServerBinding">
+			<soap:address location="http://localhost/SOAP/controller/server.php"/>
+		</port>
+	</service>
+</definitions>
