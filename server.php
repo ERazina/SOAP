@@ -11,15 +11,16 @@
 		}
 
 		//получаем всех пользователей, которые купили товар
-		public function getUser(){
+		public function getUser($id){
 			$db = mysqli_query('localhost', 'root', '', 'order');
 			mysqli_set_charset($db, 'utf8');
-			$query = 'SELECT `product`.`name`, `user`.`name` from `order`
+			$query = 'SELECT `product`.`name` AS `product`, `user`.`name` AS `user` from `order`
 					left join `product` on (`product`.`id` = `order`.`product_id`)
 					left join `user` on (`user`.`id` = `order`.`user_id`)
 					WHERE `product`.`id` = '.$id.'
 					;';
-			$responce = mysqli_query($db, $query);
+			$q = mysqli_query($db, $query);
+			$response = mysqli_fetch_all($q, MYSQLI_ASSOC);
 			return json_encode($responce);
 		}
 		//Получаем список всех товаров

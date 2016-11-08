@@ -12,7 +12,9 @@
 	<message name="getStatResponse">
 		<part name="getStatReturn" type="xsd:string" />
 	</message>
-	<message name="getUser" />
+	<message name="getUser">
+		<part name="getUserReturn" type="xsd:integer" />
+	</message>
 	<message name="getUserResponse">
 		<part name="getUserReturn" type="xsd:string" />
 	</message>
